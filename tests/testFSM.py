@@ -1,5 +1,5 @@
 import unittest
-import state_machine as fsm
+import fsm.state_machine as fsm
 
 
 class TestCreateFSM(unittest.TestCase):
