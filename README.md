@@ -5,7 +5,7 @@
 
 Simple FSM class for event driven application under GNU Affero license v3.0 license.
 
-**pyFSM** is compatible with Python-3.
+**pyFSM** is compatible with Python-2 and Python-3.
 
 ### What is pyFSM intended for?
 
