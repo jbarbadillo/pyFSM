@@ -1,4 +1,5 @@
 # pyFSM
+[![PyPI](https://img.shields.io/pypi/l/pyFSM.svg)](https://github.com/jbarbadillo/pyFSM/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/jbarbadillo/pyFSM.svg?branch=master)](https://travis-ci.org/jbarbadillo/pyFSM)
 
 Simple FSM class for event driven application under GNU Affero license v3.0 license.
