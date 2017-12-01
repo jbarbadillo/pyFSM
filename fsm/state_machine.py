@@ -20,9 +20,15 @@ class StateMachine:
         print("FSM created!")
 
     def propagateEvent(self, event):
-        currentState = self.getCurrentState()
-        if event in currentState.transitions:
-            self.currentState = currentState.transitions[event]
+        if self.started:
+            currentState = self.getCurrentState()
+            if event in currentState.transitions:
+                self.currentState = self.getStateByName(currentState.transitions[event])
+                # TODO execute run method on state
+            return True
+        else:
+            return False
+
 
     def addStates(self, states):
         for stateName in states:

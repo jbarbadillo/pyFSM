@@ -29,8 +29,26 @@ class TestCreateFSM(unittest.TestCase):
         self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
 
         self.assertEqual(self.state_machine.started, False)
+        # TODO test return values on start
         self.state_machine.startFSM()
         self.assertEqual(self.state_machine.currentState.name, "IDLE")
         self.assertEqual(self.state_machine.started, True)
+
+    def test_propagate_event(self):
+        states = ["READY", "RUNNING", "IDLE"]
+        initial_state = "IDLE"
+        events = ["initialized", "start", "finish"]
+        transitions = []
+        transitions.append(["IDLE", "initialized", "READY"])
+        transitions.append(["READY", "start", "RUNNING"])
+        transitions.append(["RUNNING", "finish", "IDLE"])
+        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+
+        self.state_machine.startFSM()
+        code = self.state_machine.propagateEvent("initialized")
+        self.assertEqual(code, True)
+        self.assertEqual(self.state_machine.currentState.name, "READY")
+
+
 if __name__ == '__main__':
     unittest.main()
