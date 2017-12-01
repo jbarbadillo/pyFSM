@@ -64,9 +64,12 @@ class StateMachine:
         for state in self._states:
             if state.name == name:
                 print("Found state '%s'" % name)
-                return state
+                break
         else:
             print("Not found")
+            return False
+
+        return state
 
     def getCurrentState(self):
         return self.currentState
