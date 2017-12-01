@@ -1,5 +1,6 @@
 # pyFSM
 [![PyPI](https://img.shields.io/pypi/l/pyFSM.svg)](https://github.com/jbarbadillo/pyFSM/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c51f4d7e4e384e5ab7bd3058eb977b4c)](https://www.codacy.com/app/jbarbadillo/pyFSM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jbarbadillo/pyFSM&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/jbarbadillo/pyFSM.svg?branch=master)](https://travis-ci.org/jbarbadillo/pyFSM)
 
 Simple FSM class for event driven application under GNU Affero license v3.0 license.
