@@ -7,20 +7,28 @@ class State:
 
 class StateMachine:
     currentState = None
+    initialState = None
 
     def __init__(self, states, initial_state, events, transitions):
         self._states = []
         self.addStates(states)  # possible states
         self._events = events  # allowed events
         self.initialState = initial_state
-        self.currentState = self.getStateByName(initial_state)
+
         self.addTransitions(transitions)
+        self.started = False
         print("FSM created!")
 
     def propagateEvent(self, event):
-        currentState = self.getCurrentState()
-        if event in currentState.transitions:
-            self.currentState = currentState.transitions[event]
+        if self.started:
+            currentState = self.getCurrentState()
+            if event in currentState.transitions:
+                self.currentState = self.getStateByName(currentState.transitions[event])
+                # TODO execute run method on state
+            return True
+        else:
+            return False
+
 
     def addStates(self, states):
         for stateName in states:
@@ -73,6 +81,15 @@ class StateMachine:
 
     def getCurrentState(self):
         return self.currentState
-    # def startFSM(self):
+
+    def startFSM(self):
+        if (self.initialState != None and self.currentState == None):
+            self.currentState = self.getStateByName(self.initialState)
+            self.started = True
+            # TODO execute run on current state
+            print("StateMachine::Started!")
+            return True
+        else:
+            return False
     # def stopFSM(self):
     # def updateFSM(self):
