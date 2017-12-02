@@ -25,8 +25,8 @@ class StateMachine:
     def propagateEvent(self, event):
         if self.started:
             currentState = self.getCurrentState()
-            if event in currentState.transitions:
-                self.currentState = self.getStateByName(currentState.transitions[event])
+            if event in currentState._transitions:
+                self.currentState = self.getStateByName(currentState._transitions[event])
                 # TODO execute run method on state
             return True
         else:
