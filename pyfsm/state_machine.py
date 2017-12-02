@@ -4,7 +4,7 @@ class State:
         self.name = name
 
     def run(self):
-        print("Undefined function")
+        pass
 
 
 class StateMachine:
@@ -84,11 +84,21 @@ class StateMachine:
     def getCurrentState(self):
         return self.currentState
 
+    def checkValidStates(self):
+        # checks that all states have valid transitions and a function bound
+        for state in self._states:
+            if len(state.transitions) < 1:
+                return False
+
+        return True
+
     def startFSM(self):
-        if self.initialState != None and self.currentState == None:
-            self.currentState = self.getStateByName(self.initialState)
+        if self.initialState != None and self.checkValidStates:
+            if self.currentState == None:
+                self.currentState = self.getStateByName(self.initialState)
+
             self.started = True
-            # TODO execute run on current state
+            self.currentState.run()
             print("pyFSM::started")
             return True
         else:

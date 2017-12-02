@@ -83,13 +83,16 @@ class TestCreateFSM(unittest.TestCase):
         self.state_machine.updateFSM()
 
         self.state_machine.propagateEvent("initialized")
-        self.state_machine.updateFSM()
+        response = self.state_machine.updateFSM()
+        self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("start")
-        self.state_machine.updateFSM()
+        response = self.state_machine.updateFSM()
+        self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("finish")
-        self.state_machine.updateFSM()
+        response = self.state_machine.updateFSM()
+        self.assertEqual(response, True)
         print("---------------------------------------------")
 
 if __name__ == '__main__':
