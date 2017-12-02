@@ -1,5 +1,6 @@
 class State:
     transitions = {}
+
     def __init__(self, name):
         self.name = name
 
@@ -93,8 +94,8 @@ class StateMachine:
 
         return True
 
-    def isEmptyFunction(self, func):
-        @staticmethod
+    @staticmethod
+    def isEmptyFunction(func):
         def empty_func():
             pass
 
