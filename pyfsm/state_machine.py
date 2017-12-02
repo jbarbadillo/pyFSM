@@ -1,8 +1,7 @@
 class State:
-    transitions = {}
-
     def __init__(self, name):
         self.name = name
+        self.transitions = {}
 
     @classmethod
     def run(cls):
@@ -44,11 +43,11 @@ class StateMachine:
             self.addTransition(transition)
 
     def addTransition(self, transition):
-        if self.validateTransition(transition) == True:
-            print("Valid transition")
+        if self.validateTransition(transition):
+            pass
         else:
             print("Invalid transition")
-            return
+            return False
 
         # transition[origin,event, destiny]
         state = self.getStateByName(transition[0])
@@ -65,7 +64,7 @@ class StateMachine:
         else:
             return False
         if transition[2] in (state.name for state in self._states):
-            print("Valid origin '%s'" % transition[2])
+            print("Valid target '%s'" % transition[2])
         else:
             return False
 
