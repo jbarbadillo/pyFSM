@@ -17,7 +17,7 @@ class StateMachine:
 
         self.addTransitions(transitions)
         self.started = False
-        print("FSM created!")
+        print("pyFSM created!")
 
     def propagateEvent(self, event):
         if self.started:
@@ -83,13 +83,20 @@ class StateMachine:
         return self.currentState
 
     def startFSM(self):
-        if (self.initialState != None and self.currentState == None):
+        if self.initialState != None and self.currentState == None:
             self.currentState = self.getStateByName(self.initialState)
             self.started = True
             # TODO execute run on current state
-            print("StateMachine::Started!")
+            print("pyFSM::started")
             return True
         else:
             return False
-    # def stopFSM(self):
+
+    def stopFSM(self):
+        if self.started:
+            self.started = False
+            print("pyFSM::stopped")
+            return True
+        else:
+            return False
     # def updateFSM(self):
