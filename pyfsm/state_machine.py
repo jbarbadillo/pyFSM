@@ -94,6 +94,7 @@ class StateMachine:
         return True
 
     def isEmptyFunction(self, func):
+        @staticmethod
         def empty_func():
             pass
 
