@@ -2,7 +2,7 @@ from setuptools import setup
 setup(
     name = 'pyFSM',
     version='1.0',
-    packages = ['fsm'],
+    packages = ['pyfsm'],
     license = 'AGPL v3',
     description = 'FSM for event driven applications',
     url = 'https://github.com/jbarbadillo/pyFSM',

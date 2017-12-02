@@ -1,7 +1,7 @@
 __pycache__/
+*.pyc
 .idea/
 venv/
 dist
 build
-
-config.json
+fsm.egg-info
