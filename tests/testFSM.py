@@ -57,6 +57,40 @@ class TestCreateFSM(unittest.TestCase):
         response = self.state_machine.stopFSM()
         self.assertEqual(response, True)
 
+    def test_bind_methods(self):
+        print("---------   TEST BIND METHODS -------------")
+        def ready():
+            print("STATE READY")
+
+        def running():
+            print("STATE RUNNING")
+
+        def idle():
+            print("STATE IDLE")
+
+        states = ["READY", "RUNNING", "IDLE"]
+        initial_state = "IDLE"
+        events = ["initialized", "start", "finish"]
+        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
+        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+
+        #bind functions
+        self.state_machine._states[0].run = ready
+        self.state_machine._states[1].run = running
+        self.state_machine._states[2].run = idle
+
+        self.state_machine.startFSM()
+        self.state_machine.updateFSM()
+
+        self.state_machine.propagateEvent("initialized")
+        self.state_machine.updateFSM()
+
+        self.state_machine.propagateEvent("start")
+        self.state_machine.updateFSM()
+
+        self.state_machine.propagateEvent("finish")
+        self.state_machine.updateFSM()
+        print("---------------------------------------------")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,8 +1,10 @@
 class State:
     transitions = {}
-
     def __init__(self, name):
         self.name = name
+
+    def run(self):
+        print("Undefined function")
 
 
 class StateMachine:
@@ -12,7 +14,7 @@ class StateMachine:
     def __init__(self, states, initial_state, events, transitions):
         self._states = []
         self.addStates(states)  # possible states
-        self._events = events  # allowed events
+        self._events = events   # allowed events
         self.initialState = initial_state
 
         self.addTransitions(transitions)
@@ -99,4 +101,10 @@ class StateMachine:
             return True
         else:
             return False
-    # def updateFSM(self):
+
+    def updateFSM(self):
+        if self.started and self.currentState:
+            self.currentState.run()
+            return True
+        else:
+            return False
