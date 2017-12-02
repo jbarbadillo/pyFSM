@@ -93,7 +93,7 @@ class StateMachine:
 
         return True
 
-    def isEmptyFunction(func):
+    def isEmptyFunction(self, func):
         def empty_func():
             pass
 
