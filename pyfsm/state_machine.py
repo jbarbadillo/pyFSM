@@ -18,7 +18,9 @@ class StateMachine:
         self._events = events   # allowed events
         self.initialState = initial_state
 
-        self.addTransitions(transitions)
+        if not self.addTransitions(transitions):
+            return None
+
         self.started = False
         print("pyFSM created!")
 
@@ -40,7 +42,8 @@ class StateMachine:
 
     def addTransitions(self, transitions):
         for transition in transitions:
-            self.addTransition(transition)
+            if not self.addTransition(transition):
+                return False
 
     def addTransition(self, transition):
         if self.validateTransition(transition):

@@ -3,6 +3,7 @@ import pyfsm.state_machine as fsm
 
 
 class TestCreateFSM(unittest.TestCase):
+    # Creates a valid state machine
     def test_create_FSM(self):
         states = ["READY", "RUNNING", "IDLE"]
         initial_state = "IDLE"
@@ -14,6 +15,17 @@ class TestCreateFSM(unittest.TestCase):
         self.assertEqual(len(self.state_machine._states), 3)
         self.assertEqual(len(self.state_machine._events), 3)
         self.assertEqual(self.state_machine.currentState, None)
+
+    # Creates a state machine with invalid transitions
+    def test_create_bad_transitions(self):
+        states = ["READY", "RUNNING", "IDLE"]
+        initial_state = "IDLE"
+        events = ["initialized", "start", "finish"]
+        transitions = [["IDLE", "initialized", "READY"], ["ABORTED", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
+        response = self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+
+        # TODO destroy class if invalid trnasitions
+        # self.assertEqual(response, None)
 
     def test_start_FSM(self):
         states = ["READY", "RUNNING", "IDLE"]
