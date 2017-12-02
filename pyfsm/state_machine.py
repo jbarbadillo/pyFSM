@@ -1,7 +1,7 @@
 class State:
     def __init__(self, name):
         self.name = name
-        self.transitions = {}
+        self._transitions = {}
 
     @classmethod
     def run(cls):
@@ -51,7 +51,7 @@ class StateMachine:
 
         # transition[origin,event, destiny]
         state = self.getStateByName(transition[0])
-        state.transitions[transition[1]] = transition[2]
+        state._transitions[transition[1]] = transition[2]
         print("Added transition %s + %s -> %s" % (transition[0], transition[1], transition[2]))
 
     def validateTransition(self, transition):
@@ -68,7 +68,11 @@ class StateMachine:
         else:
             return False
 
-        # TODO check that transition does not overlap other transition
+        # check that transition does not overlap other transition
+        state = self.getStateByName(transition[0])
+        if transition[1] in state._transitions:
+            print("A transition exisists already for this event '%s' !" % transition[1])
+            return False
         return True
 
     def getStateByName(self, name):
