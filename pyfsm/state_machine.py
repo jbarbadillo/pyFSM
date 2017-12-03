@@ -97,16 +97,17 @@ class StateMachine:
     def checkValidStates(self):
         # checks that all states have valid transitions and a function bound
         for state in self._states:
-            if len(state._transitions) < 1 and self.isEmptyFunction(state.run()):
+            if len(state._transitions) < 1 or self.isEmptyFunction(state.run):
+                print("Empty function! You must assing a function to state")
                 return False
 
         return True
 
+    @staticmethod
     def isEmptyFunction(func):
         def empty_func():
             pass
 
-        print("called function")
         return func.__code__.co_code == empty_func.__code__.co_code
 
     def startFSM(self):
