@@ -92,5 +92,12 @@ def runFlightMission():
     while state != "LANDING":
         state= state_machine.propagateEvent("position_reached")
 
+
+    state_machine.propagateEvent("initialized")
+    state_machine.propagateEvent("start_mission")
+    state_machine.propagateEvent("position_reached")
+    state_machine.propagateEvent("abort")
+
+
 # Call main application
 runFlightMission()
