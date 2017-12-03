@@ -71,7 +71,34 @@ def runFlightMission():
         print("Could not create FSM!")
         return False
 
+    # bind functions
+    state_machine._states[0].run = idle
+    state_machine._states[1].run = ready
+    state_machine._states[2].run = takeOff
+    state_machine._states[3].run = point1
+    state_machine._states[4].run = point2
+    state_machine._states[5].run = point3
+    state_machine._states[6].run = point4
+    state_machine._states[7].run = point5
+    state_machine._states[8].run = land
+    state_machine._states[9].run = abort
+
     state_machine.startFSM()
+
+    state_machine.propagateEvent("initialized")
+
+    state_machine.propagateEvent("start_mission")
+    state = ""
+    while state != "IDLE":
+        state_machine.propagateEvent("position_reached")
+        state = state_machine.currentState.name
+
+    print("Starting mission again")
+    state_machine.propagateEvent("initialized")
+    state_machine.propagateEvent("start_mission")
+    state_machine.propagateEvent("position_reached")
+    state_machine.propagateEvent("abort")
+    state_machine.propagateEvent("position_reached")
 
 # Call main application
 runFlightMission()

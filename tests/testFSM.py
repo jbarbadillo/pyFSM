@@ -2,21 +2,39 @@ import unittest
 import pyfsm.state_machine as fsm
 
 
+def initStateMachine(obj):
+    states = ["READY", "RUNNING", "IDLE"]
+    initial_state = "IDLE"
+    events = ["initialized", "start", "finish"]
+    transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
+    obj.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+
+
+# define functions for states
+def ready():
+    print("Function STATE READY")
+
+
+def running():
+    print("Function STATE RUNNING")
+
+
+def idle():
+    print("Function STATE IDLE")
+
+
 class TestCreateFSM(unittest.TestCase):
     # Creates a valid state machine
     def test_create_FSM(self):
         print("---------test_create_FSM----------------")
-        states = ["READY", "RUNNING", "IDLE"]
-        initial_state = "IDLE"
-        events = ["initialized", "start", "finish"]
-        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+        initStateMachine(self)
 
         self.assertEqual(self.state_machine.initialState, "IDLE")
         self.assertEqual(len(self.state_machine._states), 3)
         self.assertEqual(len(self.state_machine._events), 3)
         self.assertEqual(self.state_machine.currentState, None)
         print("----------------------------------------")
+
     # Creates a state machine with invalid transitions
     def test_create_bad_transitions(self):
         print("---------test_create_bad_transitions----------------")
@@ -36,20 +54,8 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_start_FSM(self):
         print("---------test_start_FSM----------------")
-        def ready():
-            print("Function STATE READY")
 
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
-
-        states = ["READY", "RUNNING", "IDLE"]
-        initial_state = "IDLE"
-        events = ["initialized", "start", "finish"]
-        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+        initStateMachine(self)
 
         self.assertEqual(self.state_machine.started, False)
         # TODO test return values on start
@@ -65,20 +71,8 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_propagate_event(self):
         print("---------test_propagate_event----------------")
-        def ready():
-            print("Function STATE READY")
 
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
-
-        states = ["READY", "RUNNING", "IDLE"]
-        initial_state = "IDLE"
-        events = ["initialized", "start", "finish"]
-        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+        initStateMachine(self)
 
         # bind functions
         self.state_machine._states[0].run = ready
@@ -93,22 +87,10 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_stop_FSM(self):
         print("---------test_stop_FSM----------------")
-        def ready():
-            print("Function STATE READY")
 
-        def running():
-            print("Function STATE RUNNING")
+        initStateMachine(self)
 
-        def idle():
-            print("Function STATE IDLE")
-
-        states = ["READY", "RUNNING", "IDLE"]
-        initial_state = "IDLE"
-        events = ["initialized", "start", "finish"]
-        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
-
-        #Try to stop without starting
+        # Try to stop without starting
         response = self.state_machine.stopFSM()
         self.assertEqual(response, False)
 
@@ -127,36 +109,24 @@ class TestCreateFSM(unittest.TestCase):
     def test_bind_methods(self):
         print("---------test_bind_methods-------------")
 
-        def ready():
-            print("Function STATE READY")
+        initStateMachine(self)
 
-        def running():
-            print("Function STATE RUNNING")
+        response = self.state_machine.startFSM()
+        self.assertFalse(response)
 
-        def idle():
-            print("Function STATE IDLE")
-
-        states = ["READY", "RUNNING", "IDLE"]
-        initial_state = "IDLE"
-        events = ["initialized", "start", "finish"]
-        transitions = [["IDLE", "initialized", "READY"], ["READY", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
-
-        #bind functions
+        # bind functions
         self.state_machine._states[0].run = ready
         self.state_machine._states[1].run = running
         self.state_machine._states[2].run = idle
 
         self.state_machine.startFSM()
-        response = self.state_machine.propagateEvent("initialized")
-        self.assertEqual(response, True)
+        self.state_machine.propagateEvent("initialized")
 
         self.state_machine.propagateEvent("start")
-        self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("finish")
-        self.assertEqual(response, True)
         print("---------------------------------------------")
+
 
 if __name__ == '__main__':
     unittest.main()
