@@ -23,6 +23,7 @@ class StateMachine:
 
         self.started = False
         print("pyFSM created!")
+
         #TODO print a summary of states and transitions
 
     def propagateEvent(self, event):
@@ -96,21 +97,21 @@ class StateMachine:
     def checkValidStates(self):
         # checks that all states have valid transitions and a function bound
         for state in self._states:
-            if len(state.transitions) < 1 and self.isEmptyFunction(state.run()):
+            if len(state._transitions) < 1 and self.isEmptyFunction(state.run()):
                 return False
 
         return True
 
-    @staticmethod
     def isEmptyFunction(func):
         def empty_func():
             pass
 
+        print("called function")
         return func.__code__.co_code == empty_func.__code__.co_code
 
     def startFSM(self):
-        if self.initialState != None and self.checkValidStates:
-            if self.currentState == None:
+        if self.initialState is not None and self.checkValidStates():
+            if self.currentState is None:
                 self.currentState = self.getStateByName(self.initialState)
 
             self.started = True
