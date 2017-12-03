@@ -12,6 +12,11 @@ class StateMachine:
     currentState = None
     initialState = None
 
+    #def __new__(cls, states, initial_state, events, transitions):
+    #    if validFSM(states, events, transitions):
+    #        instance = super(StateMachine, cls).__new__(cls)
+    #        return instance
+
     def __init__(self, states, initial_state, events, transitions):
         self._states = []
         self.addStates(states)  # possible states
@@ -19,7 +24,7 @@ class StateMachine:
         self.initialState = initial_state
 
         if not self.addTransitions(transitions):
-            return None
+            raise ValueError
 
         self.started = False
         print("pyFSM created!")

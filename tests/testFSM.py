@@ -22,10 +22,14 @@ class TestCreateFSM(unittest.TestCase):
         initial_state = "IDLE"
         events = ["initialized", "start", "finish"]
         transitions = [["IDLE", "initialized", "READY"], ["ABORTED", "start", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
-        response = self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+
+        try:
+            self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
+        except ValueError:
+            print("Bad StateMachine initialization")
 
         # TODO destroy class if invalid trnasitions
-        # self.assertEqual(response, None)
+        #self.assertEqual(response, None)
 
     def test_start_FSM(self):
         states = ["READY", "RUNNING", "IDLE"]
