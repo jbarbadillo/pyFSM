@@ -3,43 +3,46 @@ import pyfsm.state_machine as fsm
 
 def idle():
     print("STATE IDLE")
+    print("STATE IDLE::Waiting for initialization parameters")
 
 
 def ready():
     print("STATE READY")
+    print("STATE READY::Initialization done. Waiting for START")
 
 
 def takeOff():
     print("STATE TAKING_OFF")
+    print("STATE TAKING_OFF::Going to take off point")
 
 
 def point1():
     print("STATE POINT1")
-
+    print("STATE POINT1::Going to point1")
 
 def point2():
     print("STATE POINT2")
-
+    print("STATE POINT2::Going to point2")
 
 def point3():
     print("STATE POINT3")
-
+    print("STATE POINT3::Going to point3")
 
 def point4():
     print("STATE POINT4")
-
+    print("STATE POINT4::Going to point4")
 
 def point5():
     print("STATE POINT5")
-
+    print("STATE POINT5::Going to point5")
 
 def land():
     print("STATE LANDING")
-
+    print("STATE LANDING::Going to landing position")
 
 def abort():
     print("STATE ABORTING")
-
+    print("STATE ABORTING::Going to default position")
 
 
 def runFlightMission():
