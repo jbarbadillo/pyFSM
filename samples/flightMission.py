@@ -87,17 +87,18 @@ def runFlightMission():
 
     state_machine.propagateEvent("initialized")
 
-    state = state_machine.propagateEvent("start_mission")
+    state_machine.propagateEvent("start_mission")
+    state = ""
+    while state != "IDLE":
+        state_machine.propagateEvent("position_reached")
+        state = state_machine.currentState.name
 
-    while state != "LANDING":
-        state= state_machine.propagateEvent("position_reached")
-
-
+    print("Starting mission again")
     state_machine.propagateEvent("initialized")
     state_machine.propagateEvent("start_mission")
     state_machine.propagateEvent("position_reached")
     state_machine.propagateEvent("abort")
-
+    state_machine.propagateEvent("position_reached")
 
 # Call main application
 runFlightMission()
