@@ -12,11 +12,6 @@ class StateMachine:
     currentState = None
     initialState = None
 
-    #def __new__(cls, states, initial_state, events, transitions):
-    #    if validFSM(states, events, transitions):
-    #        instance = super(StateMachine, cls).__new__(cls)
-    #        return instance
-
     def __init__(self, states, initial_state, events, transitions):
         self._states = []
         self.addStates(states)  # possible states
@@ -28,6 +23,7 @@ class StateMachine:
 
         self.started = False
         print("pyFSM created!")
+        #TODO print a summary of states and transitions
 
     def propagateEvent(self, event):
         if self.started:
@@ -57,27 +53,24 @@ class StateMachine:
         if self.validateTransition(transition):
             pass
         else:
+            # TODO explain why is invalid
             print("Invalid transition")
             return False
 
         # transition[origin,event, destiny]
         state = self.getStateByName(transition[0])
         state._transitions[transition[1]] = transition[2]
-        print("Added transition %s + %s -> %s" % (transition[0], transition[1], transition[2]))
         return True
 
     def validateTransition(self, transition):
-        if transition[1] in self._events:
-            print("Valid event '%s'" % transition[1])
-        else:
+        if not transition[1] in self._events:
+            print("Invalid transition: Event '%s' is not registered" % transition[1])
             return False
-        if transition[0] in (state.name for state in self._states):
-            print("Valid origin '%s'" % transition[0])
-        else:
+        if not transition[0] in (state.name for state in self._states):
+            print("Invalid transition: Origin '%s' is not registered as a state" % transition[0])
             return False
-        if transition[2] in (state.name for state in self._states):
-            print("Valid target '%s'" % transition[2])
-        else:
+        if not transition[2] in (state.name for state in self._states):
+            print("Invalid transition: Target '%s' is not registered as a state" % transition[2])
             return False
 
         # check that transition does not overlap other transition
@@ -90,10 +83,9 @@ class StateMachine:
     def getStateByName(self, name):
         for state in self._states:
             if state.name == name:
-                print("Found state '%s'" % name)
                 break
         else:
-            print("Not found")
+            print("Not found state %s" % name)
             return False
 
         return state
