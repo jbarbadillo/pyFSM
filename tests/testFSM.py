@@ -35,7 +35,6 @@ class TestCreateFSM(unittest.TestCase):
         self.assertEqual(self.state_machine.currentState, None)
         print("----------------------------------------")
 
-
     # Creates a state machine with invalid transitions
     def test_create_bad_transitions(self):
         print("---------test_create_bad_transitions----------------")
@@ -72,14 +71,6 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_propagate_event(self):
         print("---------test_propagate_event----------------")
-        def ready():
-            print("Function STATE READY")
-
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
 
         initStateMachine(self)
 
@@ -99,7 +90,7 @@ class TestCreateFSM(unittest.TestCase):
 
         initStateMachine(self)
 
-        #Try to stop without starting
+        # Try to stop without starting
         response = self.state_machine.stopFSM()
         self.assertEqual(response, False)
 
@@ -120,7 +111,7 @@ class TestCreateFSM(unittest.TestCase):
 
         initStateMachine(self)
 
-        #bind functions
+        # bind functions
         self.state_machine._states[0].run = ready
         self.state_machine._states[1].run = running
         self.state_machine._states[2].run = idle
@@ -135,6 +126,7 @@ class TestCreateFSM(unittest.TestCase):
         self.state_machine.propagateEvent("finish")
         self.assertEqual(response, True)
         print("---------------------------------------------")
+
 
 if __name__ == '__main__':
     unittest.main()
