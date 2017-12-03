@@ -10,6 +10,19 @@ def initStateMachine(obj):
     obj.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
 
 
+# define functions for states
+def ready():
+    print("Function STATE READY")
+
+
+def running():
+    print("Function STATE RUNNING")
+
+
+def idle():
+    print("Function STATE IDLE")
+
+
 class TestCreateFSM(unittest.TestCase):
     # Creates a valid state machine
     def test_create_FSM(self):
@@ -21,6 +34,8 @@ class TestCreateFSM(unittest.TestCase):
         self.assertEqual(len(self.state_machine._events), 3)
         self.assertEqual(self.state_machine.currentState, None)
         print("----------------------------------------")
+
+
     # Creates a state machine with invalid transitions
     def test_create_bad_transitions(self):
         print("---------test_create_bad_transitions----------------")
@@ -40,14 +55,6 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_start_FSM(self):
         print("---------test_start_FSM----------------")
-        def ready():
-            print("Function STATE READY")
-
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
 
         initStateMachine(self)
 
@@ -89,14 +96,6 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_stop_FSM(self):
         print("---------test_stop_FSM----------------")
-        def ready():
-            print("Function STATE READY")
-
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
 
         initStateMachine(self)
 
@@ -119,17 +118,8 @@ class TestCreateFSM(unittest.TestCase):
     def test_bind_methods(self):
         print("---------test_bind_methods-------------")
 
-        def ready():
-            print("Function STATE READY")
-
-        def running():
-            print("Function STATE RUNNING")
-
-        def idle():
-            print("Function STATE IDLE")
-
         initStateMachine(self)
-        
+
         #bind functions
         self.state_machine._states[0].run = ready
         self.state_machine._states[1].run = running
