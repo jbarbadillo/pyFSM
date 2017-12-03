@@ -23,6 +23,7 @@ class StateMachine:
 
         self.started = False
         print("pyFSM created!")
+
         #TODO print a summary of states and transitions
 
     def propagateEvent(self, event):
@@ -31,7 +32,6 @@ class StateMachine:
             if event in currentState._transitions:
                 self.currentState = self.getStateByName(currentState._transitions[event])
                 self.currentState.run()
-                # TODO execute run method on state
             return True
         else:
             return False
@@ -76,7 +76,8 @@ class StateMachine:
         # check that transition does not overlap other transition
         state = self.getStateByName(transition[0])
         if transition[1] in state._transitions:
-            print("A transition exists already for this event '%s' !" % transition[1])
+            print("A transition already exists for event '%s' : '%s + %s -> %s' !" % (transition[1], transition[0], transition[1], state._transitions[transition[1]]))
+            print("You can not add the transition: '%s + %s -> %s' !" % (transition[0], transition[1], transition[2]))
             return False
         return True
 
@@ -96,7 +97,8 @@ class StateMachine:
     def checkValidStates(self):
         # checks that all states have valid transitions and a function bound
         for state in self._states:
-            if len(state.transitions) < 1 and self.isEmptyFunction(state.run()):
+            if len(state._transitions) < 1 or self.isEmptyFunction(state.run):
+                print("Empty function! You must assing a function to state")
                 return False
 
         return True
@@ -109,8 +111,8 @@ class StateMachine:
         return func.__code__.co_code == empty_func.__code__.co_code
 
     def startFSM(self):
-        if self.initialState != None and self.checkValidStates:
-            if self.currentState == None:
+        if self.initialState is not None and self.checkValidStates():
+            if self.currentState is None:
                 self.currentState = self.getStateByName(self.initialState)
 
             self.started = True
