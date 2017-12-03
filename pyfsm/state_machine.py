@@ -29,6 +29,7 @@ class StateMachine:
             currentState = self.getCurrentState()
             if event in currentState._transitions:
                 self.currentState = self.getStateByName(currentState._transitions[event])
+                self.currentState.run()
                 # TODO execute run method on state
             return True
         else:
@@ -45,6 +46,8 @@ class StateMachine:
             if not self.addTransition(transition):
                 return False
 
+        return True
+
     def addTransition(self, transition):
         if self.validateTransition(transition):
             pass
@@ -56,6 +59,7 @@ class StateMachine:
         state = self.getStateByName(transition[0])
         state._transitions[transition[1]] = transition[2]
         print("Added transition %s + %s -> %s" % (transition[0], transition[1], transition[2]))
+        return True
 
     def validateTransition(self, transition):
         if transition[1] in self._events:
@@ -74,7 +78,7 @@ class StateMachine:
         # check that transition does not overlap other transition
         state = self.getStateByName(transition[0])
         if transition[1] in state._transitions:
-            print("A transition exisists already for this event '%s' !" % transition[1])
+            print("A transition exists already for this event '%s' !" % transition[1])
             return False
         return True
 
