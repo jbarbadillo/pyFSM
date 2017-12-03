@@ -111,20 +111,20 @@ class TestCreateFSM(unittest.TestCase):
 
         initStateMachine(self)
 
+        response = self.state_machine.startFSM()
+        self.assertFalse(response)
+
         # bind functions
         self.state_machine._states[0].run = ready
         self.state_machine._states[1].run = running
         self.state_machine._states[2].run = idle
 
         self.state_machine.startFSM()
-        response = self.state_machine.propagateEvent("initialized")
-        self.assertEqual(response, True)
+        self.state_machine.propagateEvent("initialized")
 
         self.state_machine.propagateEvent("start")
-        self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("finish")
-        self.assertEqual(response, True)
         print("---------------------------------------------")
 
 
