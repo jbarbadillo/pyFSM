@@ -81,14 +81,15 @@ class TestCreateFSM(unittest.TestCase):
 
     def test_bind_methods(self):
         print("---------test_bind_methods-------------")
+
         def ready():
-            print("STATE READY")
+            print("Function STATE READY")
 
         def running():
-            print("STATE RUNNING")
+            print("Function STATE RUNNING")
 
         def idle():
-            print("STATE IDLE")
+            print("Function STATE IDLE")
 
         states = ["READY", "RUNNING", "IDLE"]
         initial_state = "IDLE"
@@ -102,18 +103,13 @@ class TestCreateFSM(unittest.TestCase):
         self.state_machine._states[2].run = idle
 
         self.state_machine.startFSM()
-        self.state_machine.updateFSM()
-
-        self.state_machine.propagateEvent("initialized")
-        response = self.state_machine.updateFSM()
+        response = self.state_machine.propagateEvent("initialized")
         self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("start")
-        response = self.state_machine.updateFSM()
         self.assertEqual(response, True)
 
         self.state_machine.propagateEvent("finish")
-        response = self.state_machine.updateFSM()
         self.assertEqual(response, True)
         print("---------------------------------------------")
 

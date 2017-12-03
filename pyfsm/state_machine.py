@@ -31,7 +31,6 @@ class StateMachine:
             if event in currentState._transitions:
                 self.currentState = self.getStateByName(currentState._transitions[event])
                 self.currentState.run()
-                # TODO execute run method on state
             return True
         else:
             return False
