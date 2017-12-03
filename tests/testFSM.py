@@ -29,6 +29,9 @@ class TestCreateFSM(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
 
+        transitions = [["IDLE", "initialized", "READY"], ["IDLE", "initialized", "RUNNING"], ["RUNNING", "finish", "IDLE"]]
+        with self.assertRaises(ValueError):
+            self.state_machine = fsm.StateMachine(states, initial_state, events, transitions)
         print("----------------------------------------")
 
     def test_start_FSM(self):

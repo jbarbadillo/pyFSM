@@ -75,7 +75,8 @@ class StateMachine:
         # check that transition does not overlap other transition
         state = self.getStateByName(transition[0])
         if transition[1] in state._transitions:
-            print("A transition exists already for this event '%s' !" % transition[1])
+            print("A transition already exists for event '%s' : '%s + %s -> %s' !" % (transition[1], transition[0], transition[1], state._transitions[transition[1]]))
+            print("You can not add the transition: '%s + %s -> %s' !" % (transition[0], transition[1], transition[2]))
             return False
         return True
 
