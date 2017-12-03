@@ -98,7 +98,7 @@ class StateMachine:
         # checks that all states have valid transitions and a function bound
         for state in self._states:
             if len(state._transitions) < 1 or self.isEmptyFunction(state.run):
-                print("Empty function! You must assing a function to state")
+                print("State %s cannot have an empty function! Asign a funtion and start again" % state.name)
                 return False
 
         return True
