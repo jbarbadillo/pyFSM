@@ -6,6 +6,7 @@ setup(
     license = 'AGPL v3',
     description = 'FSM for event driven applications',
     author = "Javier Barbadillo",
+    author_email = "javier.barbadillo@gmail.com",
     url = 'https://github.com/jbarbadillo/pyFSM',
     download_url = 'https://github.com/jbarbadillo/pyFSM/archive/1.0.tar.gz',
     keywords = ['fsm', 'state-machine'],
