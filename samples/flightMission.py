@@ -1,4 +1,4 @@
-import pyfsm.state_machine as fsm
+import pyfsmlib.state_machine as fsm
 
 
 def idle():

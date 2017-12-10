@@ -1,8 +1,8 @@
 from setuptools import setup
 setup(
-    name = 'pyfsm',
+    name = 'pyfsmlib',
     version='1.0',
-    packages = ['pyfsm'],
+    packages = ['pyfsmlib'],
     license = 'AGPL v3',
     description = 'FSM for event driven applications',
     author = "Javier Barbadillo",
