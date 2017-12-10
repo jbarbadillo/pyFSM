@@ -1,11 +1,13 @@
 from setuptools import setup
 setup(
-    name = 'pyFSM',
+    name = 'pyfsm',
     version='1.0',
     packages = ['pyfsm'],
     license = 'AGPL v3',
     description = 'FSM for event driven applications',
+    author = "Javier Barbadillo",
     url = 'https://github.com/jbarbadillo/pyFSM',
+    download_url = 'https://github.com/jbarbadillo/pyFSM/archive/1.0.tar.gz',
     keywords = ['fsm', 'state-machine'],
     classifiers = ['Programming Language :: Python',
                    'Programming Language :: Python :: 2.7',
