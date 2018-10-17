@@ -3,7 +3,7 @@ setup(
     name = 'pyFSM',
     version='1.0',
     packages = ['pyfsm'],
-    license = 'AGPL v3',
+    license = 'LGPL v3',
     description = 'FSM for event driven applications',
     url = 'https://github.com/jbarbadillo/pyFSM',
     keywords = ['fsm', 'state-machine'],
