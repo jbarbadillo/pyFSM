@@ -3,7 +3,7 @@ setup(
     name = 'pyfsmlib',
     version='1.0',
     packages = ['pyfsmlib'],
-    license = 'AGPL v3',
+    license = 'LGPL v3',
     description = 'FSM for event driven applications',
     author = "Javier Barbadillo",
     author_email = "javier.barbadillo@gmail.com",

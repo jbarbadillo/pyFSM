@@ -1,7 +1,7 @@
 # pyFSM
 [![PyPI](https://img.shields.io/pypi/v/pyfsmlib.svg)](https://pypi.python.org/pypi/pyfsmlib)
 [![PyPI](https://img.shields.io/pypi/pyversions/pyfsmlib.svg)](https://pypi.python.org/pypi/pyfsmlib)
-[![PyPI](https://img.shields.io/pypi/l/pyfsmlib.svg)](https://github.com/jbarbadillo/pyfsmlib/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/jbarbadillo/pyfsm.svg)](https://github.com/jbarbadillo/pyFSM/blob/master/LICENSE)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c51f4d7e4e384e5ab7bd3058eb977b4c)](https://www.codacy.com/app/jbarbadillo/pyFSM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jbarbadillo/pyFSM&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/jbarbadillo/pyFSM.svg?branch=master)](https://travis-ci.org/jbarbadillo/pyFSM)
 
